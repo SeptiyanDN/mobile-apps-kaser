@@ -14,11 +14,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoginEvent>((event, emit) async {
       emit(AuthLoading());
       final result = await _authRepo.login(event.email, event.password);
-      if (result != "user not found") {
-        emit(AuthSuccessful());
-      }
-      if (result == "user not found") {
-        emit(AuthError("Missing password OR  user not found"));
+      if (result['meta']['code'] == 200) {
+        emit(AuthSuccessful(result['meta']['message'].toString()));
+      } else {
+        emit(AuthError(result['meta']['message'].toString()));
       }
     });
   }

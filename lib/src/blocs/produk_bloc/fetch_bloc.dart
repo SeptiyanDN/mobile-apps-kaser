@@ -14,7 +14,6 @@ class FetchBloc extends Bloc<FetchEvent, FetchState> {
     final RepositoryFetchData _repo_fetch = RepositoryFetchData();
     on<FetchEvent>((event, emit) async {
       List<Produk> produk = await _repo_fetch.FetchProduk();
-      print("${produk}");
       emit(FetchSuccess(produk));
     });
   }

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatefulWidget {
   final TextEditingController? controller;
   final bool? obscure;
-  const CustomTextField({this.controller, this.obscure, Key? key})
+  final String? label;
+  const CustomTextField({this.controller, this.obscure, this.label, Key? key})
       : super(key: key);
 
   @override
@@ -12,6 +13,7 @@ class CustomTextField extends StatefulWidget {
 
 class _CustomTextFieldState extends State<CustomTextField> {
   late bool obsc = widget.obscure ?? false;
+  late String labels = widget.label ?? "form";
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -22,6 +24,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
           borderRadius: BorderRadius.circular(20.5),
           borderSide: const BorderSide(color: Colors.blue, width: 1.6),
         ),
+        labelText: labels,
+        labelStyle: const TextStyle(
+          color: Colors.blueGrey,
+        ),
+        suffixIcon: const Icon(Icons.abc),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20.5),
           borderSide: const BorderSide(color: Colors.blue, width: 1.6),

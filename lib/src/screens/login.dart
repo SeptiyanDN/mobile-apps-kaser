@@ -15,8 +15,9 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   AuthBloc? _authBloc;
-  final TextEditingController email =
-      TextEditingController(text: "business.septiyan@gmail.com");
+  final TextEditingController email = TextEditingController(
+    text: "business.septiyan@gmail.com",
+  );
   final TextEditingController password =
       TextEditingController(text: "business.septiyan@gmail.com");
   @override
@@ -35,7 +36,7 @@ class _LoginState extends State<Login> {
           children: <Widget>[
             const Center(
                 child: Text(
-              "Testing Login With Rest API",
+              "Testing Login With Rest",
               style: TextStyle(
                   fontSize: 50,
                   color: Colors.blue,
@@ -45,11 +46,13 @@ class _LoginState extends State<Login> {
             CustomTextField(
               controller: email,
               obscure: false,
+              label: "Email Address",
             ),
             const SizedBox(height: 20.4),
             CustomTextField(
-              controller: email,
+              controller: password,
               obscure: true,
+              label: "Password",
             ),
             const SizedBox(height: 20.4),
             BlocListener<AuthBloc, AuthState>(
@@ -60,22 +63,24 @@ class _LoginState extends State<Login> {
                     color: Colors.blue,
                   ));
                 } else if (state is AuthSuccessful) {
+                  var message = state.message;
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const HomePage();
                   }));
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(
-                    'Welcome',
-                    style: TextStyle(
+                    '${message}',
+                    style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.blue,
                         fontSize: 30),
                   )));
                 } else if (state is AuthError) {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  var msgError = state.msgError;
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(
-                    'Error',
-                    style: TextStyle(
+                    "${msgError}",
+                    style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.blue,
                         fontSize: 30),
@@ -87,7 +92,7 @@ class _LoginState extends State<Login> {
                   _authBloc!.add(
                       LoginEvent(email: email.text, password: password.text));
                 },
-                text: "Login",
+                text: "Masuk",
               ),
             ),
           ],

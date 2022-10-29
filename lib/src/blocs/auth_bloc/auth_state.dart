@@ -9,6 +9,8 @@ class AuthInitial extends AuthState {
 }
 
 class AuthSuccessful extends AuthState {
+  String? message;
+  AuthSuccessful(this.message);
   @override
   List<Object?> get props => [];
 }
